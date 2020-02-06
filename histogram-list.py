@@ -20,6 +20,8 @@ def listogram(lines):
 
     for word in lines:
         word = word.rstrip()
+        
+        # word = word.split()
         #search for word
 
     result = get_index(word, listogram)
@@ -31,6 +33,7 @@ def listogram(lines):
     return listogram
 
 lines = open("ununique-words.txt", "r").readlines()
+
 
 
 print(listogram(lines))
