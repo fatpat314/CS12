@@ -9,11 +9,13 @@ def wordHistogram():
         for line in file:
             #loop through lines
             for word in line.split(): #split into single words
-                # word_histogram = {}
+                #I dont really need this could have just kept it word.
                 single_word = word
+                # an entery into word histogram = word_histogram .get (from the key) and + 1 the value
                 word_histogram[single_word] = word_histogram.get(single_word, 0) + 1
 
     return word_histogram
+
 
     # unique Words
 def ununiqueWords(histogram):
@@ -31,26 +33,3 @@ def ununiqueWords(histogram):
 def frequency(word, histogram):
     #return the frequency of the given "word" in the "histogram"
     return histogram[word]
-
-
-#print(f"the frequency of your word is {frequency('the', wordHistogram())}")
-#ununiqueWords()
-
-
-
-
-
-
-
-# filename = "ununique-words.txt"
-# filehandle = open(filename, "r")
-# lines = filehandle.readlines()
-#
-# word_histogram = {}
-#
-# for word in lines:
-#     single_word = word.split(";")
-#     # word = word.rstrip()
-#     word_histogram[word] = word_histogram.get(single_word, 0) + 1
-#
-# print(word_histogram)

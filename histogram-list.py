@@ -1,42 +1,50 @@
 """histogram-list.py"""
 
+# def listogram(lines):
+#     #defines an empty list as "listogram"
+#     listogram = []
 
-
-def listogram(lines):
-    listogram = []
-
+#accepts 2 arguments of a word and listomram
 def get_index(word, listogram):
+    #setting index to 0
     index = 0
+    # Loop through listogram and for each inner_list
     for inner_list in listogram:
+        #if inner_list index of 0 is the word return index
         if inner_list[0] == word:
             return index
         else:
+            #increse index by 1
             index += 1
     return "nope didn't find it"
 
 
 def listogram(lines):
+    #defines an empty list as "listogram"
     listogram = []
 
-    for word in lines:
-        word = word.rstrip()
-        
-        # word = word.split()
-        #search for word
-
-    result = get_index(word, listogram)
-    if result == "nope didn't find it":
-        listogram.append([word,1])
-    else:
-        listogram[result][1] += 1
+    #for each line in the file
+    for lines in file:
+        lines = lines.rstrip()
+        #for each word in the lines
+        for word in lines.split():
+            #reset get_index to result
+            result = get_index(word, listogram)
+            #if result is "string"
+            if result == "nope didn't find it":
+                #add a dict of a word and the number 1
+                listogram.append([word,1])
+            else:
+                #increse listogram innerlist value by 1
+                listogram[result][1] += 1
 
     return listogram
+#access files
+file = open("ununique-words.txt", "r").readlines()
 
-lines = open("ununique-words.txt", "r").readlines()
 
 
-
-print(listogram(lines))
+print(listogram(file))
 
 
 

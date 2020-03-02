@@ -69,7 +69,7 @@ class Listogram:
         '''Randomly samples from the list of list histogram based on the frequency, returns a word'''
         #TODO: use your sample function as a starting point to complete this method
         #You will need to adapt it a little bit to work with listogram
-        random_index = randint(0, self.tokens - 1) #work on this!!!!!!!!!!!
+        random_index = randint(0, self.tokens - 1) 
 
         start = 0
         for word, count in self.list_histogram:

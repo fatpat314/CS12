@@ -17,7 +17,9 @@ class Dictogram:
     def build_dictogram(self):
         '''Creates a histogram dictionary using the word_list property and returns it'''
         #TODO: use your histogram function as a starting point to complete this method
+        #Make an empty dictionary
         dictogram = {}
+        #for each word in the word list
         for word in self.word_list:
             dictogram[word] = dictogram.get(word, 0) + 1
 
