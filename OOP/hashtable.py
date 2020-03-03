@@ -1,4 +1,5 @@
 from linkedlist import LinkedList, Node
+# set first, then length, then get
 
 
 class HashTable(object):
@@ -39,8 +40,9 @@ class HashTable(object):
         # TODO: Collect all values in each bucket
         values_list = []
         for bucket in self.buckets:
-            all_items.extend(bucket.value())
-        return all_items
+            for key, value in bucket.items():
+                value_list.append(value)
+            return bucket(value)
 
 
 
@@ -63,24 +65,55 @@ class HashTable(object):
         """Return True if this hash table contains the given key, or False.
         TODO: Running time: O(???) Why and under what conditions?"""
         # TODO: Find bucket where given key belongs
+        index = self._bucket_index(key)
+        ll = self.buckets[index]
         # TODO: Check if key-value entry exists in bucket
+        result = ll.find(lambda item: item[0] == key)
+        if result is not None:
+            return True
+        # TODO: Check if key-value entry exists in bucket
+        else:
+            return False
 
     def get(self, key):
         """Return the value associated with the given key, or raise KeyError.
         TODO: Running time: O(???) Why and under what conditions?"""
         # TODO: Find bucket where given key belongs
+        index = self._bucket_index(key)
+        ll = self.buckets[index]
         # TODO: Check if key-value entry exists in bucket
+        value = ll.find(lambda item: item[0] == key)
         # TODO: If found, return value associated with given key
+        if value != None:
+            return value[1]
+
         # TODO: Otherwise, raise error to tell user get failed
         # Hint: raise KeyError('Key not found: {}'.format(key))
+        else:
+            return KeyError('Key not found: {}'.format(key))
+
+
+
 
     def set(self, key, value):
         """Insert or update the given key with its associated value.
         TODO: Running time: O(???) Why and under what conditions?"""
         # TODO: Find bucket where given key belongs
-        # TODO: Check if key-value entry exists in bucket
+        index = self._bucket_index(key)
+        ll = self.buckets[index]
+        result = ll.find(lambda item: item[0] == key)
+
+        if result is not None:
+            print('hello')
+
+            ll.delete((key, result[1]))
+            ll.append((key, value))
+
         # TODO: If found, update value associated with given key
+
         # TODO: Otherwise, insert given key-value entry into bucket
+        else:
+            ll.append((key, value))
 
     def delete(self, key):
         """Delete the given key from this hash table, or raise KeyError.

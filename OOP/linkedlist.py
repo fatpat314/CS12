@@ -114,6 +114,7 @@ class LinkedList(object):
 
         return new_node
 
+
     def find(self, quality):
         """Return an item from this linked list satisfying the given quality.
         TODO: Best case running time: O(???) Why and under what conditions?
@@ -134,6 +135,7 @@ class LinkedList(object):
         #     else:
         #         return False
 
+    # def find_node():
 
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.
@@ -141,7 +143,7 @@ class LinkedList(object):
         TODO: Worst case running time: O(???) Why and under what conditions?"""
         # TODO: Loop through all nodes to find one whose data matches given item
         """Huge shout out to Sam for helping us with this functing"""
-        
+
         if self.is_empty(): #if is_empty is True
             raise ValueError('Item not found: {}'.format(item)) #The list is empty and throw error
             return
