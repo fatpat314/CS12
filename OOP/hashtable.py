@@ -8,6 +8,7 @@ class HashTable(object):
         """Initialize this hash table with the given initial size."""
         # Create a new list (used as fixed-size array) of empty linked lists
         self.buckets = [LinkedList() for _ in range(init_size)]
+        self.size = 0
 
     def __str__(self):
         """Return a formatted string representation of this hash table."""
@@ -41,8 +42,8 @@ class HashTable(object):
         values_list = []
         for bucket in self.buckets:
             for key, value in bucket.items():
-                value_list.append(value)
-            return bucket(value)
+                values_list.append(value)
+        return values_list
 
 
 
@@ -60,6 +61,11 @@ class HashTable(object):
         TODO: Running time: O(???) Why and under what conditions?"""
         # TODO: Loop through all buckets
         # TODO: Count number of key-value entries in each bucket
+        counter = 0
+        for bucket in self.buckets:
+            for key in bucket.items():
+                counter +=1
+        return counter
 
     def contains(self, key):
         """Return True if this hash table contains the given key, or False.
@@ -90,7 +96,7 @@ class HashTable(object):
         # TODO: Otherwise, raise error to tell user get failed
         # Hint: raise KeyError('Key not found: {}'.format(key))
         else:
-            return KeyError('Key not found: {}'.format(key))
+            raise KeyError('Key not found: {}'.format(key))
 
 
 
@@ -101,19 +107,20 @@ class HashTable(object):
         # TODO: Find bucket where given key belongs
         index = self._bucket_index(key)
         ll = self.buckets[index]
+
+
         result = ll.find(lambda item: item[0] == key)
 
+
+
         if result is not None:
-            print('hello')
+
 
             ll.delete((key, result[1]))
-            ll.append((key, value))
 
-        # TODO: If found, update value associated with given key
-
-        # TODO: Otherwise, insert given key-value entry into bucket
+            ll.append((key,value))
         else:
-            ll.append((key, value))
+            ll.append((key,value))
 
     def delete(self, key):
         """Delete the given key from this hash table, or raise KeyError.
@@ -123,6 +130,16 @@ class HashTable(object):
         # TODO: If found, delete entry associated with given key
         # TODO: Otherwise, raise error to tell user delete failed
         # Hint: raise KeyError('Key not found: {}'.format(key))
+        index = self._bucket_index(key)
+        ll = self.buckets[index]
+
+        result = ll.find(lambda key_value: key_value[0] == key)
+
+        if result:
+            ll.delete(result)
+            self.size -= 1
+        else:
+            raise KeyError('Key not found: {}'.format(key))
 
 
 def test_hash_table():
